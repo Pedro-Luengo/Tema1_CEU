@@ -1,4 +1,4 @@
 def new_func():
-    print("Hola t")
+    print("Dario es un gilipollas")
 
 new_func()

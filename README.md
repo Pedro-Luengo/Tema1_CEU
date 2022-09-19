@@ -102,3 +102,4 @@ Puedes utilizar la sintaxis "elemento in lista"
 elementos = [1, 5, -2]
  
 # Completa el ejercicio aquí
+https://github.com/Pedro-Luengo/Tema1_CEU.git

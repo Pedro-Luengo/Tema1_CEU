@@ -1,4 +1,4 @@
 def new_func():
-    print("Dario el mas duro")
+    print("Dario el duro")
 
 new_func()

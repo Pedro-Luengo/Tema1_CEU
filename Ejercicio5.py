@@ -1,4 +1,4 @@
-Ejercicio 5
+## Ejercicio 5
 Crea un script llamado descomposicion.py que realice las siguientes tareas:
 
 Debe tomar 1 argumento que será un número entero positivo.

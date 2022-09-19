@@ -1,4 +1,4 @@
 def new_func():
-    print("Hola")
+    print("Hola t")
 
 new_func()

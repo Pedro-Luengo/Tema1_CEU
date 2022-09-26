@@ -1,4 +1,5 @@
 ## Ejercicio 5
+'''
 Crea un script llamado descomposicion.py que realice las siguientes tareas:
 
 Debe tomar 1 argumento que será un número entero positivo.
@@ -20,3 +21,4 @@ El programa deberá devolver una descomposición línea a línea como la siguien
 Pista
 
 Que el valor sea un número no significa necesariamente que deba serlo para formatearlo. Necesitarás jugar muy bien con los índices y realizar muchas conversiones entre tipos cadenas, números y viceversa
+'''

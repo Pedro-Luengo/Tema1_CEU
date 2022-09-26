@@ -1,4 +1,5 @@
 ## Ejercicio 6
+'''
 Realiza una función separar(lista) que tome una lista de números enteros y devuelva dos listas ordenadas. La primera con los números pares y la segunda con los números impares.
 
 Por ejemplo:
@@ -16,3 +17,4 @@ print(impares)
 Sugerencia
 
 Para ordenar una lista automáticamente puedes utilizar el método .sort().
+'''

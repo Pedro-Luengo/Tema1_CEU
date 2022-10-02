@@ -22,3 +22,11 @@ Pista
 
 Que el valor sea un número no significa necesariamente que deba serlo para formatearlo. Necesitarás jugar muy bien con los índices y realizar muchas conversiones entre tipos cadenas, números y viceversa
 '''
+
+numero = int(input("Escriba un numero mayor que 0 y menor que 9999: "))
+if numero < 0 or numero > 9999:
+    print("El numero tiene que ser mayor que 0 y menor que 9999")
+lista_num = [int(a) for a in str(numero)]
+print(lista_num)
+        
+    

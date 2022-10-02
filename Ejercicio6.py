@@ -18,3 +18,15 @@ Sugerencia
 
 Para ordenar una lista automáticamente puedes utilizar el método .sort().
 '''
+def separar_lista():
+    lista = [3,5,6,8,16,20,1,73,4]
+    lista_pares = []
+    lista_impares = []
+    for a in lista:
+        if int(a) % 2 == 0:
+            lista_pares.append(a)
+        elif int(a) % 2 != 0:
+            lista_impares.append(a)
+    print(sorted(lista_pares))
+    print(sorted(lista_impares))
+separar_lista()

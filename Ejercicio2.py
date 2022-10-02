@@ -9,7 +9,9 @@ Multiplica el numero_usuario por 9 en sí mismo
 Multiplica el numero_magico por el numero_usuario en sí mismo
 Finalmente muestra el valor final del numero_magico por pantalla
 '''
-numero_magico = 12345679
-numero_usuario = int(input("Escriba un número entre el 1 y el 9: ")) * 9
-numero_magico = numero_magico * numero_usuario
-print(numero_magico)
+def operaciones():
+    numero_magico = 12345679
+    numero_usuario = int(input("Escriba un número entre el 1 y el 9: ")) * 9
+    numero_magico = numero_magico * numero_usuario
+    print(numero_magico)
+operaciones()

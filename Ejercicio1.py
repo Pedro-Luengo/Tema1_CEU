@@ -13,5 +13,7 @@ Para voltear una cadena rápidamente utilizando slicing podemos utilizar un terc
 
 cadena = "zeréP nauJ,01"
 '''
-cadena = "zerép nauJ,01"
-print(cadena[:-3][::-1] + " ha sacado una nota de " + cadena[-2:][::-1])
+def girar_cadena(): 
+    cadena = "zerép nauJ,01"
+    print(cadena[:-3][::-1] + " ha sacado una nota de " + cadena[-2:][::-1])
+girar_cadena()

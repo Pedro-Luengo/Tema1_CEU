@@ -26,7 +26,11 @@ Que el valor sea un número no significa necesariamente que deba serlo para form
 numero = int(input("Escriba un numero mayor que 0 y menor que 9999: "))
 if numero < 0 or numero > 9999:
     print("El numero tiene que ser mayor que 0 y menor que 9999")
-lista_num = [int(a) for a in str(numero)]
+lista_num = [str(a) for a in str(numero)]
 print(lista_num)
+print(lista_num[0]+"000")
+print("0"+lista_num[1]+"00")
+print("00"+lista_num[2]+"0")
+print("000"+lista_num[3])
         
     

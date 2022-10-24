@@ -1,10 +1,6 @@
 import sys
-"""sys.path(0,"lugar de la ruta")"""
+from Introducir import solicitar_introducir_cadena
 
-def fibonacciR(n):
-    """Calculo de fibonacci recursivo"""
-    if(n == 0 or n == 1):
-        return n
-    else:
-        return fibonacciR(n-1) + fibonacciR(n-2)
-fibonacciR(32)
+a = solicitar_introducir_cadena("¿Como te llamas?")
+a
+print(a)

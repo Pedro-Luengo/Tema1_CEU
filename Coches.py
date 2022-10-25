@@ -26,14 +26,14 @@ class camioneta(coche):
     def __str__(self):
         return super().__str__() + f"{self.carga} kg"
 
-    class bicicleta (vehiculo):
+class bicicleta (vehiculo):
 
-        def __init__(self, color, ruedas, tipo):
-            super().__init__(color, ruedas)
-            self.tipo = tipo
+    def __init__(self, color, ruedas, tipo):
+        super().__init__(color, ruedas)
+        self.tipo = tipo
 
-        def __str__(self):
-            return super().__str__() + f"{self.tipo}"
+    def __str__(self):
+        return super().__str__() + f"{self.tipo}"
 
     class motocicleta(bicicleta):
 

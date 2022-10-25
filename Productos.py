@@ -16,9 +16,13 @@ class producto:
         else:
             print(f"El producto: {self.nombre} no se ha añadido con exito. ")    
 
-Producto_1 = producto(codigo="#994889", nombre="Tablet", precio="200€", tipo="Electronica")
+Producto_1 = producto(codigo="#974529", nombre="movil", precio="1200€", tipo="Electronica")
+Producto_2 = producto(codigo="#874932", nombre="sudadera", precio="80€", tipo="Ropa")
+Producto_3 = producto(codigo="#874933", nombre="pantalon", precio="110€", tipo="Ropa")
 print(Producto_1)
 print(Producto_1.nombre)
+Producto_1.nombre = "samsung"
+print(Producto_1.nombre)
 print(type(Producto_1))
-producto.añadir(Producto_1)
-print(Producto_1.añadido)
+producto.añadir(Producto_2)
+print(Producto_2.añadido)

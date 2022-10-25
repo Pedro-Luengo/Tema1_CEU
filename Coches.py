@@ -42,4 +42,5 @@ class coche(vehiculo):
             self.velocidad = velocidad
             self.cilindrada = cilindrada
 
-        
+        def __str__(self):
+            return super().__str__() + f"{self.velocidad} km/h, {self.cilindrada} cc"

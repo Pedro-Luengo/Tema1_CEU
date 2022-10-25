@@ -5,7 +5,7 @@ class vehiculo:
         self.ruedas = ruedas
 
     def __str__(self):
-        return f"color {self.color}, {self.ruedas} ruedas. "
+        return f"color {self.color}, {self.ruedas} ruedas"
 
 class coche(vehiculo):
 
@@ -24,7 +24,7 @@ class camioneta(coche):
         self.carga = carga
 
     def __str__(self):
-        return super().__str__() + f"{self.carga} kg"
+        return super().__str__() + f", {self.carga} kg"
 
 class bicicleta (vehiculo):
 
@@ -33,7 +33,7 @@ class bicicleta (vehiculo):
         self.tipo = tipo
 
     def __str__(self):
-        return super().__str__() + f"{self.tipo}"
+        return super().__str__() + f", {self.tipo}"
 
 class motocicleta(bicicleta):
 
@@ -56,7 +56,7 @@ def catalogar(vehiculos, ruedas = None):
         for i in vehiculos:
             if i.ruedas == ruedas:
                 contador += 1
-        print(f"\nSe han encontrado {contador} vehiculor con {ruedas} ruedas. ")
+        print(f"\nSe han encontrado {contador} vehiculos con {ruedas} ruedas. ")
     
     for i in vehiculos:
         if ruedas==None:
@@ -69,8 +69,8 @@ def catalogar(vehiculos, ruedas = None):
 lista = [
     coche("Rojo", 4, 260 , 1500),
     camioneta("Azul", 4, 200, 1200, 2000),
-    bicicleta("Amarillo", 2, "Deportiva"),
-    motocicleta("Rojo", 2,"De carreras", 320, 2000)
+    bicicleta("Amarillo", 2, "deportiva"),
+    motocicleta("Rojo", 2,"de carreras", 320, 2000)
 ]
 
 catalogar(lista)

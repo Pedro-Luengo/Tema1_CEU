@@ -6,7 +6,7 @@ class producto:
         self.precio = precio
         self.tipo = tipo
 
-    def _str_(self):
+    def __str__(self):
         return "{}\t{}\t{}\t {}".format(self.codigo, self.nombre, self.precio, self.tipo)
 
     def añadir(self):

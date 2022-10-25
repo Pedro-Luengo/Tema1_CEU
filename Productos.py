@@ -14,3 +14,9 @@ class producto:
             print(f"El producto: {self.nombre} se ha añadido con exito. ")
         else:
             print(f"El producto: {self.nombre} no se ha añadido con exito. ")    
+
+        Producto_1 = producto("#994889", "Tablet", "200€", "Electronica")
+        print(Producto_1.nombre)
+        print(type(Producto_1))
+        producto.añadir(Producto_1)
+        print(Producto_1.añadido)

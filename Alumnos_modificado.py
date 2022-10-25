@@ -12,4 +12,7 @@ class alumno:
             print("El alumno ha suspendido la asignatura. ")
         else:
             print("El alumno no ha obtenido una calificación válida.")
-        
+    
+    def __str__(self):
+        return f"{self.nombre} \t {self.nota}"
+

@@ -67,10 +67,10 @@ def catalogar(vehiculos, ruedas = None):
 
 
 lista = [
-    coche("", , , ),
-    camioneta(" ",,,,),
-    bicicleta("",,""),
-    motocicleta("",,"",,)
+    coche("Rojo", 4, 260 , 1500),
+    camioneta("Azul", 4, 200, 1200, 2000),
+    bicicleta("Amarillo", 2, "Deportiva"),
+    motocicleta("Rojo", 2,"De carreras", 320, 2000)
 ]
 
 catalogar(lista)

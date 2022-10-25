@@ -57,8 +57,26 @@ def catalogar(vehiculos, ruedas = None):
             if i.ruedas == ruedas:
                 contador += 1
         print(f"\nSe han encontrado {contador} vehiculor con {ruedas} ruedas. ")
+    
+    for i in vehiculos:
+        if ruedas==None:
+            print(type(i).__name__, i)
+        else:
+            if i.ruedas == ruedas:
+                print(type(i).__name__, i)
 
 
+lista = [
+    coche("", , , ),
+    camioneta(" ",,,,),
+    bicicleta("",,""),
+    motocicleta("",,"",,)
+]
+
+catalogar(lista)
+catalogar(lista, 0)
+catalogar(lista, 2)
+catalogar(lista, 4)
 
 
     

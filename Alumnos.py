@@ -21,3 +21,6 @@ Javi = alumno("Javier", 7)
 Mareque = alumno("Mareque", 4)
 print(Mareque)
 alumno.calificacion(Mareque)
+alumno.calificacion(Javi)
+Javi.nota = 4
+alumno.calificacion(Javi)

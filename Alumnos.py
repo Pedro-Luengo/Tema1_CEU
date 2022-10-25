@@ -16,7 +16,8 @@ class alumno:
         else:
             print("El alumno no ha obtenido una calificación válida.")
     
-
+Dario = alumno("Dario", 5)
+Javi = alumno("Javier", 7)
 Mareque = alumno("Mareque", 4)
 print(Mareque)
 alumno.calificacion(Mareque)

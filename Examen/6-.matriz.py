@@ -1,18 +1,35 @@
 matriz = []
 
-def crear_matriz(numero):
-    for i in range (numero):
+
+def crear_matriz(n):
+    for i in range (n):
         matriz.append([])
-        for j in range (numero):
+        for j in range (n):
             matriz[i].append(0)
     return matriz
 
-def rellenar(numero):
-    matriz = crear_matriz(numero)
-    for x in range (numero):
-        for y in range (numero):
+def rellenar(n):
+    matriz = crear_matriz(n)
+    for x in range (n):
+        for y in range (n):
             matriz[x][y] = float(input('Valor de [' + str(x) + '][' + str(y) + '] = '))
 
-numero = int(input ('Cual es el tamaño de la matriz : '))
-rellenar(numero)
-print(f"{matriz[0]}\n{matriz[1]}\n {matriz[2]}\n{matriz[3]}\n{matriz[4]}\n")
+def gauss(n):
+    for z in range (n-1):
+        for x in range(1, n-z):
+            if (matriz[z][z] != 0 ):
+                p = matriz[x+z][z] / matriz[z][z]
+                for y in range (n):
+                    matriz[x+z][y] = matriz[x+z][y] - (matriz[z][y]*p)
+
+def determinante(n):
+    determinante=1
+    for x in range (n):
+        determinante=matriz[x][x]*determinante
+    print ('\nEl determinante de la matriz es = ', determinante)
+
+n = int(input ('Tamano de la matriz : '))
+rellenar(n)
+gauss(n)
+determinante(n)
+

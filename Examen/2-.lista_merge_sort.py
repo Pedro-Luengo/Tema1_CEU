@@ -1,16 +1,20 @@
 numeros = [18, 50, 210, 80, 145, 333, 70, 30]
 
-def modificar(lista):
+#Apartado 1
+#Creo una funcion que me creee una lista aparta con multiplos de 10 y valores menores a 200.
+def imprimir(lista):
     multiplos1 = []
     for n in lista:
         if n % 10 == 0 and  n < 200:
             multiplos1.append(n)
     return multiplos1
 
-multiplos = modificar(numeros)
+multiplos = imprimir(numeros)
 print(multiplos)
 
-def modificar_2(lista):
+#Apartado 2
+#Hago lo mismo que en el apartado anterior pero si el valor es >300 salgo del bucle.
+def imprimir_2(lista):
     multiplos2 = []
     for n in lista:
         if n > 300:
@@ -19,9 +23,11 @@ def modificar_2(lista):
             multiplos2.append(n)
     return multiplos2
 
-multiplos_2 = modificar_2(numeros)
+multiplos_2 = imprimir_2(numeros)
 print(multiplos_2)
 
+#Apartado 3
+#Utilizo la funcion merge_sort() para ordenar la lista inicial de menor a mayor.
 def merge_sort(coleccion: list) -> list:
     def merge(izquierda: list, derecha: list) -> list:
 
@@ -38,10 +44,10 @@ def merge_sort(coleccion: list) -> list:
     mid = len(coleccion) // 2
     return merge(merge_sort(coleccion[:mid]), merge_sort(coleccion[mid:]))
 
-
 print(merge_sort(numeros), sep=",")
 
-
+#Apartado 4
+#Finalmente hago una funcion indice para que me de el valor del indice en las dos situaciones.
 def indice(lista):
     if 145 in lista:
         print(numeros.index(145))

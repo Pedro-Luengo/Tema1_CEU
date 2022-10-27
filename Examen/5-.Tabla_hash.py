@@ -13,7 +13,7 @@ class hash_tabla():
     #Ahora calculamos la funcion hash de una cadena. Para ello asigno un valor de la tabla a cada caracter.
     #viendo la funcion bernstein, usamos el numero magico(33)
     def funcion_hash(self, caracter):
-        return ord(caracter) * 33 % self.tamaño_tab
+        return ord(caracter) * 33 % self.tamaño_tabla
     
     #Método para ingresar elementos
     def Insertar_elementos(self, valor):
@@ -54,6 +54,6 @@ cadena_encriptada = A.encriptar(cadena)
 print(f"Cadena encriptada: {cadena_encriptada}")
 #Desencriptamos y mostramos la cadena normal:
 cadena_desencriptada = A.des_encriptar(cadena_encriptada)
-print(f"Cadena desencriptada: {cadena_desencriptada}".format(cadena_desencriptada))
+print(f"Cadena desencriptada: {cadena_desencriptada}")
 
     

@@ -3,7 +3,7 @@ class Nodo(object):
 
     info, sig = None, None
 
-class datoPolinomio(object):
+class datoPolinomio(Nodo):
     """Clase dato polinomio"""
 
     def __init__(self, valor, termino):
@@ -21,12 +21,12 @@ class polinomio(datoPolinomio):
         self.termino_mayor = termino_mayor
         self.grado = grado
 
-def agregar_termino(polinomio, termino, valor):
+def agregar_termino(datoPolinomio, valor, termino):
     """Agregar un termino y un valor al polinomio"""
     aux = Nodo()
     dato = datoPolinomio(valor, termino)
     aux.info = dato
-    if(termino > polinomio.grado):
+    if(valor > polinomio.grado):
         aux.sig = polinomio.termino_mayor
         polinomio.termino_mayor = aux
         polinomio.grado = termino

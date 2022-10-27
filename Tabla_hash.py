@@ -40,19 +40,19 @@ class hash_tabla():
         return resultado
 
 alfabeto = [chr(i) for i in range(32, 125)]
-#Creo la tabla hash del tamaño de la longitud del alfabeto
+#Lo primero es crear la tabla hash del tamaño de la longitud del alfabeto
 A = hash_tabla(len(alfabeto))
 #Inserto un elemento en la tabla hash
-#A.Insertar_elementos("A")
+A.Insertar_elementos("A")
 #Imprime la tabla hash para comprobado que se han insertado bien los elementos
-#A.imprime_tabla()
+A.imprime_tabla()
 
 #Imprime una palabra encriptada
 cadena = input("Introduce una cadena: ")
-print("Cadena sin encriptar: {}".format(cadena))
-Cadena_encriptada = A.encriptar(cadena)
-print("Cadena encriptada: {}".format(Cadena_encriptada))
-Cadena_des_escriptada = A.des_encriptar(Cadena_encriptada)
-print("Cadena desencriptada: {}".format(Cadena_des_escriptada))
+print(f"Cadena sin encriptar: {cadena}")
+cadena_encriptada = A.encriptar(cadena)
+print(f"Cadena encriptada: {cadena_encriptada}")
+cadena_desencriptada = A.des_encriptar(cadena_encriptada)
+print(f"Cadena desencriptada: {cadena_desencriptada}".format(cadena_desencriptada))
 
     

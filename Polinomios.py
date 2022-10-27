@@ -6,7 +6,7 @@ class Nodo(object):
 class datoPolinomio(Nodo):
     """Clase dato polinomio"""
 
-    def __init__(self, valor, termino):
+    def _init_(self, valor, termino):
         """Crea un dato del polinomio con el valor (x^n) y el termino (m)"""
         self.valor = valor
         self.termino = termino
@@ -15,9 +15,9 @@ class datoPolinomio(Nodo):
 class polinomio(datoPolinomio):
     """Clase polinomio"""
 
-    def __init__(self, valor, termino, termino_mayor, grado):
+    def _init_(self, valor, termino, termino_mayor, grado):
         """Crea un polinomio del grado cero"""
-        super().__init__(valor, termino)
+        super()._init_(valor, termino)
         self.termino_mayor = termino_mayor
         self.grado = grado
 
@@ -26,7 +26,7 @@ def agregar_termino(datoPolinomio, valor, termino):
     aux = Nodo()
     dato = datoPolinomio(valor, termino)
     aux.info = dato
-    if(valor > polinomio.grado):
+    if(valor > polinomio.termino):
         aux.sig = polinomio.termino_mayor
         polinomio.termino_mayor = aux
         polinomio.grado = termino
@@ -37,14 +37,14 @@ def agregar_termino(datoPolinomio, valor, termino):
         aux.sig = actual.sig
         actual.sig = aux
 
-def modificar_termino(polinomio, termino, valor):
+def modificar_termino(datoPolinomio, termino, valor):
     """Modifica un termino del polinomio"""
     aux = polinomio.termino_mayor
     while(aux is not None and aux.info.termino != termino):
         aux = aux.sig
     aux.info.valor = valor
 
-def obtener_valor(polinomio, termino):
+def obtener_valor(datoPolinomio, termino):
     """Devuelve el valor de un termino del polinomio"""
     aux = polinomio.termino_mayor
     while(aux is not None and aux.info.termino > termino):
@@ -54,7 +54,7 @@ def obtener_valor(polinomio, termino):
     else:
         return 0
 
-def mostrar(polinomio):
+def mostrar(datoPolinomio):
     """Muestra el polinomio"""
     aux = polinomio.termino_mayor
     pol = ""
@@ -66,3 +66,6 @@ def mostrar(polinomio):
             pol += signo + str(aux.info.valor) + "x^" + str(aux.info.termino)
             aux = aux.sig
     return pol
+
+A = agregar_termino(A,3,6)
+mostrar(A)

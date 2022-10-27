@@ -21,7 +21,7 @@ class polinomio(datoPolinomio):
         self.termino_mayor = termino_mayor
         self.grado = grado
 
-def agregar_termino(datoPolinomio, valor, termino):
+def agregar_termino(Polinomio, valor, termino):
     """Agregar un termino y un valor al polinomio"""
     aux = Nodo()
     dato = datoPolinomio(valor, termino)
@@ -37,14 +37,14 @@ def agregar_termino(datoPolinomio, valor, termino):
         aux.sig = actual.sig
         actual.sig = aux
 
-def modificar_termino(datoPolinomio, termino, valor):
+def modificar_termino(polinomio, termino, valor):
     """Modifica un termino del polinomio"""
     aux = polinomio.termino_mayor
     while(aux is not None and aux.info.termino != termino):
         aux = aux.sig
     aux.info.valor = valor
 
-def obtener_valor(datoPolinomio, termino):
+def obtener_valor(polinomio, termino):
     """Devuelve el valor de un termino del polinomio"""
     aux = polinomio.termino_mayor
     while(aux is not None and aux.info.termino > termino):
@@ -54,7 +54,7 @@ def obtener_valor(datoPolinomio, termino):
     else:
         return 0
 
-def mostrar(datoPolinomio):
+def mostrar(polinomio):
     """Muestra el polinomio"""
     aux = polinomio.termino_mayor
     pol = ""
@@ -67,5 +67,3 @@ def mostrar(datoPolinomio):
             aux = aux.sig
     return pol
 
-A = agregar_termino(A,3,6)
-mostrar(A)

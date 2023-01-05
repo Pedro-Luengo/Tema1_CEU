@@ -1,42 +1,54 @@
-#Desarrollar un algoritmo numérico iterativo que permita calcular el método de la bisección de una función f(x).
-import  math
+import doctest
 
-def f(x):
-    return math.exp(-x)-x
+def biseccion(f, a, b, epsilon):
+    iteraciones = 0
+    while abs(a - b) > epsilon:
+        iteraciones += 1
+        m = (a + b) / 2
+        if f(m) == 0:
+            return m
+        elif f(a) * f(m) < 0:
+            b = m
+        else:
+            a = m
+    return (a + b) / 2, iteraciones
 
-def biseccion(a, b, tol):
-    if (a) * f(b) > 0:
-        print("No hay raíz en el intervalo")
-    else:
-        while abs(b-a)>tol:
-            c=(a+b)/2
-            if f(a)*f(c)<0:
-                b = c
-            else:
-                a = c
-        return c
 
-print(biseccion(0, 1, 0.0001))
-
-# Desarrollar un algoritmo numérico iterativo que permita calcular el método de la secante de una función f(x).
-
-def secante(x0, x1, tol):
-    while abs(f(x1)) > tol:
-        x2 = x1 - f(x1) * (x1 - x0) / (f(x1) - f(x0))
+def secante(f, x0, epsilon):
+    iteraciones = 0
+    x1 = x0 - f(x0) / derivative(f, x0, epsilon)
+    while abs(x1 - x0) > epsilon:
+        iteraciones += 1
         x0 = x1
-        x1 = x2
-    return x2
+        x1 = x0 - f(x0) / derivative(f, x0, epsilon)
+    return x1, iteraciones
 
-print(secante(0, 1, 0.0001))
+def derivative(f, x, h):
+  return (f(x + h) - f(x)) / h
 
-# Desarrollar un algoritmo numérico iterativo que permita calcular el método de Newton-Raphson de una función f(x).
 
+def newton_raphson(f, df, x0, epsilon):
+    iteraciones = 0
+    x1 = x0 - f(x0) / df(x0)
+    while abs(x1 - x0) > epsilon:
+        iteraciones += 1
+        x0 = x1
+        x1 = x0 - f(x0) / df(x0)
+    return x1, iteraciones
+
+# Define la función f(x)
+def f(x):
+  return x**3 + x +16 
+# Define la derivada de la función f(x)
 def df(x):
-    return -math.exp(-x)-1
+  return 3*x**2 + 1
 
-def newtonRaphson(x, tol):
-    while abs(f(x)) > tol:
-        x = x - f(x)/df(x)
-    return x
-
-print(newtonRaphson(0, 0.0001))
+# Encuentra una raíz de f(x) con una precisión de 10^-5
+if __name__ == '__main__':
+    doctest.testmod()
+    # Encuentra una raíz de f(x) con una precisión de 10^-5
+    print(biseccion(f, 0, 4, 10**-5))
+    # Encuentra una raíz de f(x) con una precisión de 10^-5
+    print(secante(f, 1, 10**-5))
+    # Encuentra una raíz de f(x) con una precisión de 10^-5
+    print(newton_raphson(f, df, 1, 10**-5))

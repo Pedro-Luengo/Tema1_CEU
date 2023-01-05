@@ -1,0 +1,3 @@
+Color: azul. Triangulo de base: 5, altura: 3 
+Color: gris. Circulo de radio: 5
+Color: amarillo. Cuadrado de lado: 7 

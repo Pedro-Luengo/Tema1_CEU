@@ -24,6 +24,7 @@ class Graph:
     def vertex_degree(self, superhero):
         return len(superhero.connections)
 
+
 #Creamos los superheroes, que seran los vertices.
 Ironman = Superhero("Ironman")
 Hulk = Superhero("Hulk")
@@ -63,7 +64,4 @@ CaptainAmerica.add_connection(WinterSoldier, 0.5, 0.5)
 Antman.add_connection(NickFury, 0.5, 0.5)
 Antman.add_connection(WinterSoldier, 0.5, 0.5)
 NickFury.add_connection(WinterSoldier, 0.5, 0.5)
-
-
-
 

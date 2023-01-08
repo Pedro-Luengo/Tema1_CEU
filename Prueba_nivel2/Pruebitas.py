@@ -39,42 +39,7 @@ def prim(graph, start):
                     queue.put((weight, edge))
  
     return tree
-
-def get_max_episodes(graph):
-    max_episodes = 0
-    max_pairs = []
- 
-    # Buscamos la arista con mayor peso
-    for vertex, edges in graph.items():
-        for edge, weight in edges.items():
-            if weight > max_episodes:
-                max_episodes = weight
-                max_pairs = [(vertex, edge)]
-            elif weight == max_episodes:
-                max_pairs.append((vertex, edge))
- 
-    # Buscamos todas las aristas con peso máximo
-    for vertex, edges in graph.items():
-        for edge, weight in edges.items():
-            if weight == max_episodes and (vertex, edge) not in max_pairs:
-                max_pairs.append((vertex, edge))
- 
-    return max_episodes, max_pairs
-
-def get_characters(graph, episodes):
-    characters = set()
- 
-    # Recorremos todas las aristas del grafo
-    for vertex, edges in graph.items():
-        for edge, weight in edges.items():
-            # Si el peso de la arista es igual al número de episodios deseado, agregamos los vértices a la lista
-            if weight == episodes:
-                characters.add(vertex)
-                characters.add(edge)
- 
-    return characters
- 
-
+    
 graph = {
 'IronMan': {'Hulk': 6, 'Khan': 0, 'Thor': 1, 'CapitanAmerica': 8, 'Antman': 7, 'NickFury': 3, 'WinterSoldier': 2},
 'Hulk': {'IronMan': 6, 'Khan': 0, 'Thor': 6, 'CapitanAmerica': 1, 'Antman': 8, 'NickFury': 9, 'WinterSoldier': 1},
@@ -100,9 +65,3 @@ if __name__ == '__main__':
 
     # Obtener el árbol de expansión máximo
     print(prim(grafo, 'IronMan'))
-
-    # Obtener el número maximo de episodios y los pares de episodios que comparten dichos personajes
-    print(get_max_episodes(graph))
-
-    # Obtener los personajes que aparecen en 9 episodios
-    print(get_characters(graph, 9))

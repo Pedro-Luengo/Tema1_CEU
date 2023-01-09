@@ -1,27 +1,27 @@
 import heapq
 
-def dijkstra(graph, start):
-  distances = {node: float('inf') for node in graph}
-  distances[start] = 0
-  queue = [(0, start)]
-  predecessor = {start: None}
+def dijkstra(grafo, start):
+  distancias = {node: float('inf') for node in grafo}
+  distancias[start] = 0
+  cola = [(0, start)]
+  predecesor = {start: None}
   
-  while queue:
-    distance, node = heapq.heappop(queue)
+  while cola:
+    distancia, node = heapq.heappop(cola)
     
-    if distance == distances[node]:
-      for neighbor in graph[node]:
-        new_distance = distance + graph[node][neighbor]
-        if new_distance < distances[neighbor]:
-          distances[neighbor] = new_distance
-          predecessor[neighbor] = node
-          heapq.heappush(queue, (new_distance, neighbor))
+    if distancia == distancias[node]:
+      for vecino in grafo[node]:
+        new_distancia = distancia + grafo[node][vecino]
+        if new_distancia < distancias[vecino]:
+          distancias[vecino] = new_distancia
+          predecesor[vecino] = node
+          heapq.heappush(cola, (new_distancia, vecino))
           
-  return predecessor, distances
+  return predecesor, distancias
 
 # Ejemplo de uso
 
-graph = {
+grafo = {
   'Nick Fury': {'Iron Man': 675, 'The Incredible Hulk': 400, 'Khan': 166, 'Thor': 809, 'Captain America': 720, 'Ant-Man': 399, 'The Winter Soldier': 233},
   'Iron Man': {'Nick Fury': 675, 'The Incredible Hulk': 540, 'Khan': 107, 'Thor': 111, 'Captain America': 206, 'Ant-Man': 155, 'The Winter Soldier': 621},
   'The Incredible Hulk': {'Nick Fury': 400, 'Iron Man': 540, 'Khan': 687, 'Thor': 179, 'Captain America': 348, 'Ant-Man': 199, 'The Winter Soldier': 401},
@@ -32,16 +32,16 @@ graph = {
   'The Winter Soldier': {'Nick Fury': 233, 'Iron Man': 621, 'The Incredible Hulk': 401, 'Khan': 280, 'Thor': 361, 'Captain America': 576, 'Ant-Man': 621}
 }
 
-predecessor, distances = dijkstra(graph, 'Nick Fury')
+predecesor, distancias = dijkstra(grafo, 'Nick Fury')
 
 # Imprimir el recorrido completo
-node = 'Nick Fury'
+nodo = 'Nick Fury'
 path = []
-while predecessor[node] is not None:
-  path.append(node)
-  node = predecessor[node]
-path.append(node)
+while predecesor[nodo] is not None:
+  path.append(nodo)
+  node = predecesor[nodo]
+path.append(nodo)
 print(path[::-1])
 
 # Imprimir las distancias más cortas
-print(distances)
+print(distancias)

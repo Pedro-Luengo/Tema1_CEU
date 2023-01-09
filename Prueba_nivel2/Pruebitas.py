@@ -1,67 +1,49 @@
-from queue import PriorityQueue
+from typing import List
 
-class Graph:
-    def __init__(self):
-        self.vertices = {}
- 
-    def add_vertex(self, vertex):
-        if vertex not in self.vertices:
-            self.vertices[vertex] = set()
- 
-    def add_edge(self, vertex1, vertex2, weight):
-        self.vertices[vertex1].add((vertex2, weight))
-        self.vertices[vertex2].add((vertex1, weight))
- 
-    def get_edges(self, vertex):
-        return self.vertices[vertex]
-
-
-def prim(graph, start):
-    # Inicializamos el árbol de expansión y la cola de prioridad
-    tree = set()
-    queue = PriorityQueue()
- 
-    # Agregamos el vértice de partida al árbol y añadimos sus aristas a la cola de prioridad
-    tree.add(start)
-    for edge, weight in graph.get_edges(start):
-        queue.put((weight, edge))
- 
-    # Mientras haya vértices en la cola de prioridad
-    while not queue.empty():
-        # Obtenemos la arista con mayor peso
-        weight, vertex = queue.get()
- 
-        # Si el vértice no ha sido agregado al árbol de expansión, lo agregamos y añadimos sus aristas a la cola
-        if vertex not in tree:
-            tree.add(vertex)
-            for edge, weight in graph.get_edges(vertex):
-                if edge not in tree:
-                    queue.put((weight, edge))
- 
-    return tree
+class Request:
+    def __init__(self, name: str, universe: str, description: str):
+        self.name = name
+        self.universe = universe
+        self.description = description
+        self.priority = self.set_priority()
     
-graph = {
-'IronMan': {'Hulk': 6, 'Khan': 0, 'Thor': 1, 'CapitanAmerica': 8, 'Antman': 7, 'NickFury': 3, 'WinterSoldier': 2},
-'Hulk': {'IronMan': 6, 'Khan': 0, 'Thor': 6, 'CapitanAmerica': 1, 'Antman': 8, 'NickFury': 9, 'WinterSoldier': 1},
-'Khan': {'IronMan': 0, 'Hulk': 0, 'Thor': 1, 'CapitanAmerica': 2, 'Antman': 1, 'NickFury': 5, 'WinterSoldier': 0},
-'Thor': {'IronMan': 1, 'Hulk': 6, 'Khan': 1, 'CapitanAmerica': 1, 'Antman': 5, 'NickFury': 9, 'WinterSoldier': 3},
-'CapitanAmerica': {'IronMan': 8, 'Hulk': 1, 'Khan': 2, 'Thor': 1, 'Antman': 2, 'NickFury': 4, 'WinterSoldier': 5},
-'Antman': {'IronMan': 7, 'Hulk': 8, 'Khan': 1, 'Thor': 5, 'CapitanAmerica': 2, 'NickFury': 1, 'WinterSoldier': 6},
-'NickFury': {'IronMan': 3, 'Hulk': 9, 'Khan': 5, 'Thor': 9, 'CapitanAmerica': 4, 'Antman': 1, 'WinterSoldier': 1},
-'WinterSoldier': {'IronMan': 2, 'Hulk': 1, 'Khan': 0, 'Thor': 3, 'CapitanAmerica': 5, 'Antman': 6, 'NickFury': 1}
-}
-if __name__ == '__main__':
-    #Creación del grafo no dirigido
-    grafo = Graph()
+    def set_priority(self) -> int:
+        if self.name == "Gran Conquistador" or self.universe == "616" or "El que permanece" in self.description:
+            return 3
+        elif self.name == "Khan que todo lo sabe" or "Carnicero de Dioses" in self.description or self.universe == "838":
+            return 2
+        else:
+            return 1
 
-    # Agregar vértices
-    for vertex in graph:
-        grafo.add_vertex(vertex)
+class QueueManager:
+    def __init__(self):
+        self.queue = []
+        self.log = []
+    
+    def add_request(self, request: Request):
+        self.queue.append(request)
+    
+    def process_next_request(self):
+        request = self.queue.pop(0)
+        if request.priority == 3:
+            self.log.append(request)
+        else:
+            # process request
+            pass
 
-    # Agregar aristas
-    for vertex, edges in graph.items():
-        for edge, weight in edges.items():
-            grafo.add_edge(vertex, edge, weight)
+def run_queue_manager(queue_manager: QueueManager):
+    while queue_manager.queue:
+        queue_manager.process_next_request()
 
-    # Obtener el árbol de expansión máximo
-    print(prim(grafo, 'IronMan'))
+# Ejemplo de uso
+queue_manager = QueueManager()
+queue_manager.add_request(Request("Gran Conquistador", "616", "Necesito ayuda para vencer a El que permanece"))
+queue_manager.add_request(Request("Khan que todo lo sabe", "838", "Tengo un problema con el Carnicero de Dioses"))
+queue_manager.add_request(Request("Khan X", "999", "Necesito sugerencias para conquistar mi universo"))
+run_queue_manager(queue_manager)
+
+# Ver bitácora de pedidos de mayor prioridad
+for request in queue_manager.log:
+    print(f"Solicitante: {request.name}")
+    print(f"Multiverso: {request.universe}")
+    print(f"Descripción: {request.description}")

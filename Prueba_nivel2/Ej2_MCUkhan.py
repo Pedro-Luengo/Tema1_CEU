@@ -1,78 +1,55 @@
-class Request:
-    def __init__(self, khan, universo, descripcion):
-        self.khan = khan
+from typing import List
+
+class Peticion:
+    def __init__(self, nombre: str, universo: str, descripcion: str):
+        self.nombre = nombre
         self.universo = universo
         self.descripcion = descripcion
-
-class KhanDecisionCola:
-    def __init__(self):
-        self.alta_prioridad_cola = []
-        self.media_prioridad_cola = []
-        self.baja_prioridad_cola = []
-        self.cola = [[] for _ in range(3)]
-        self.bitacora = []
-
-    def add_to_bitacora(self):
-        added = False
-        while not added:
-            if len(self.alta_prioridad_cola) > 0:
-                self.bitacora.append(f"Nombre de Khan: {self.alta_prioridad_cola[0].khan}. Universo: {self.alta_prioridad_cola[0].universo}. Descripción: {self.alta_prioridad_cola[0].descripcion}")
-                added = True
-            elif len(self.media_prioridad_cola) > 0:
-                self.bitacora.append(f"Nombre de Khan: {self.media_prioridad_cola[0].khan}. Universo: {self.media_prioridad_cola[0].universo}. Descripción: {self.media_prioridad_cola[0].descripcion}")
-                added = True
-            elif len(self.baja_prioridad_cola) > 0:
-                self.bitacora.append(f"Nombre de Khan: {self.baja_prioridad_cola[0].khan}. Universo: {self.baja_prioridad_cola[0].universe}. Descripción: {self.baja_prioridad_cola[0].descripcion}")
-                added = True
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        request = self.decolar()
-        if request is not None:
-            return request
-        raise StopIteration
-
-    def add_request_to_queue(self, request):
-        self.cola.append(request)
+        self.prioridad = self.determinar_prioridad()
     
-    def encolar(self, request):
-        if request.khan == "Gran Conquistador" or request.universo == "616" or "El que permanece" in request.descripcion:
-            self.cola[0].append(f"El Khan es: {request.khan}. El universo es: {request.universo}. La descripción es: {request.descripcion}.")
-        elif request.khan == "Khan que todo lo sabe" or "Carnicero de Dioses" in request.descripcion or request.universo == "838":
-            self.cola[1].append(f"El Khan es: {request.khan}. El universo es: {request.universo}. La descripción es: {request.descripcion}.")
+    def determinar_prioridad(self):
+        if self.nombre == "Gran Conquistador" or self.universo == "616" or "El que permanece" in self.descripcion:
+            return 3
+        elif self.nombre == "Khan que todo lo sabe" or "Carnicero de Dioses" in self.descripcion or self.universo == "838":
+            return 2
         else:
-            self.cola[2].append(f"El Khan es: {request.khan}. El universo es: {request.universo}. La descripción es: {request.descripcion}.")
-        
-        
+            return 1
 
-    def decolar(self):
-        for i, requests in enumerate(self.cola):
-            if requests:
-                return self.cola[i].pop(0)
-        return None
-
-    def review_log(self):
-        return self.bitacora
-
-def print_request(request):
-    print(f"Nombre de Khan: {request.khan}")
-    print(f"Universo: {request.universo}")
-    print(f"Descripción: {request.descripcion}")
-
-if __name__ == "__main__":
-
-    cola = KhanDecisionCola()
-
-    cola.alta_prioridad_cola.append(Request("Gran Conquistador", "616", "El que permanece"))
-    cola.media_prioridad_cola.append(Request("Khan que todo lo sabe", "838", "Carnicero de Dioses"))
-    cola.baja_prioridad_cola.append(Request("Khan de otro universo", "123", "Otro pedido"))
-
-    for i in cola.alta_prioridad_cola + cola.media_prioridad_cola + cola.baja_prioridad_cola:
-        cola.encolar(i)
+class AdministrarColas:
+    def __init__(self):
+        self.cola = []
+        self.log = []
     
-    for request in cola.alta_prioridad_cola or cola.media_prioridad_cola or cola.baja_prioridad_cola:
-        cola.add_to_bitacora()
-    print(cola.cola)
-    print(cola.bitacora)
+    def añadir_peticion(self, peticion: Peticion):
+        self.cola.append(peticion)
+    
+    def procesar_siguiente_peticion(self):
+        # Buscar la siguiente petición de mayor prioridad en la cola
+        request = self.cola[0]
+        for r in self.cola:
+            if r.prioridad > request.prioridad:
+                request = r
+        # Eliminar la petición de mayor prioridad de la cola
+        self.cola.remove(request)
+        # Añadir la petición de mayor prioridad al log
+        self.log.append(request)
+        # Procesar la petición
+        pass
+
+def ejecutar_administrador_colas(administrador_colas: AdministrarColas):
+    # Procesar y eliminar sólo la primera petición de mayor prioridad de la lista self.cola
+    if administrador_colas.cola:
+        administrador_colas.procesar_siguiente_peticion()
+
+# Ejemplo de uso
+administrar_colas = AdministrarColas()
+administrar_colas.añadir_peticion(Peticion("Gran Conquistador", "616", "Necesito ayuda para vencer a El que permanece"))
+administrar_colas.añadir_peticion(Peticion("Khan que todo lo sabe", "838", "Tengo un problema con el Carnicero de Dioses"))
+administrar_colas.añadir_peticion(Peticion("Khan X", "999", "Necesito sugerencias para conquistar mi universo"))
+ejecutar_administrador_colas(administrar_colas)
+
+# Ver bitácora de pedidos de mayor prioridad
+for pedido in administrar_colas.log:
+    print(f"Solicitante: {pedido.nombre}")
+    print(f"Multiverso: {pedido.universo}")
+    print(f"Descripción: {pedido.descripcion}")

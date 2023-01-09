@@ -1,81 +1,81 @@
 from queue import PriorityQueue
 
-class Graph:
+class Grafo:
     def __init__(self):
         self.vertices = {}
  
-    def add_vertex(self, vertex):
-        if vertex not in self.vertices:
-            self.vertices[vertex] = set()
+    def añadir_vertice(self, vertice):
+        if vertice not in self.vertices:
+            self.vertices[vertice] = set()
  
-    def add_edge(self, vertex1, vertex2, weight):
-        self.vertices[vertex1].add((vertex2, weight))
-        self.vertices[vertex2].add((vertex1, weight))
+    def añadir_aristas(self, vertice1, vertice2, peso):
+        self.vertices[vertice1].add((vertice2, peso))
+        self.vertices[vertice2].add((vertice1, peso))
  
-    def get_edges(self, vertex):
-        return self.vertices[vertex]
+    def obtener_aristas(self, vertice):
+        return self.vertices[vertice]
 
 
-def prim(graph, start):
+def prim(grafo, inicio):
     # Inicializamos el árbol de expansión y la cola de prioridad
     tree = set()
-    queue = PriorityQueue()
+    cola = PriorityQueue()
  
     # Agregamos el vértice de partida al árbol y añadimos sus aristas a la cola de prioridad
-    tree.add(start)
-    for edge, weight in graph.get_edges(start):
-        queue.put((weight, edge))
+    tree.add(inicio)
+    for arista, peso in grafo.obtener_aristas(inicio):
+        cola.put((peso, arista))
  
     # Mientras haya vértices en la cola de prioridad
-    while not queue.empty():
+    while not cola.empty():
         # Obtenemos la arista con mayor peso
-        weight, vertex = queue.get()
+        peso, vertice = cola.get()
  
         # Si el vértice no ha sido agregado al árbol de expansión, lo agregamos y añadimos sus aristas a la cola
-        if vertex not in tree:
-            tree.add(vertex)
-            for edge, weight in graph.get_edges(vertex):
-                if edge not in tree:
-                    queue.put((weight, edge))
+        if vertice not in tree:
+            tree.add(vertice)
+            for arista, peso in grafo.obtener_aristas(vertice):
+                if arista not in tree:
+                    cola.put((peso, arista))
  
     return tree
 
-def get_max_episodes(graph):
-    max_episodes = 0
+def obtener_max_episodios(grafo):
+    max_episodios = 0
     max_pairs = []
  
     # Buscamos la arista con mayor peso
-    for vertex, edges in graph.items():
-        for edge, weight in edges.items():
-            if weight > max_episodes:
-                max_episodes = weight
-                max_pairs = [(vertex, edge)]
-            elif weight == max_episodes:
-                max_pairs.append((vertex, edge))
+    for vertice, aristas in grafo.items():
+        for arista, peso in aristas.items():
+            if peso > max_episodios:
+                max_episodios = peso
+                max_pares = [(vertice, arista)]
+            elif peso == max_episodios:
+                max_pairs.append((vertice, arista))
  
     # Buscamos todas las aristas con peso máximo
-    for vertex, edges in graph.items():
-        for edge, weight in edges.items():
-            if weight == max_episodes and (vertex, edge) not in max_pairs:
-                max_pairs.append((vertex, edge))
+    for vertice, aristas in grafo.items():
+        for arista, peso in aristas.items():
+            if peso == max_episodios and (vertice, arista) not in max_pares:
+                max_pares.append((vertice, arista))
  
-    return max_episodes, max_pairs
+    return max_episodios, max_pares
 
-def get_characters(graph, episodes):
-    characters = set()
+def obtener_personajes(grafo, episodios):
+    personajes = set()
  
     # Recorremos todas las aristas del grafo
-    for vertex, edges in graph.items():
-        for edge, weight in edges.items():
+    for vertice, aristas in grafo.items():
+        for arista, peso in aristas.items():
             # Si el peso de la arista es igual al número de episodios deseado, agregamos los vértices a la lista
-            if weight == episodes:
-                characters.add(vertex)
-                characters.add(edge)
+            if peso == episodios:
+                personajes.add(vertice)
+                personajes.add(arista)
  
-    return characters
+    return personajes
  
 
-graph = {
+grafo1 = {
 'IronMan': {'Hulk': 6, 'Khan': 0, 'Thor': 1, 'CapitanAmerica': 8, 'Antman': 7, 'NickFury': 3, 'WinterSoldier': 2},
 'Hulk': {'IronMan': 6, 'Khan': 0, 'Thor': 6, 'CapitanAmerica': 1, 'Antman': 8, 'NickFury': 9, 'WinterSoldier': 1},
 'Khan': {'IronMan': 0, 'Hulk': 0, 'Thor': 1, 'CapitanAmerica': 2, 'Antman': 1, 'NickFury': 5, 'WinterSoldier': 0},
@@ -87,22 +87,22 @@ graph = {
 }
 if __name__ == '__main__':
     #Creación del grafo no dirigido
-    grafo = Graph()
+    grafo = Grafo()
 
     # Agregar vértices
-    for vertex in graph:
-        grafo.add_vertex(vertex)
+    for vertice in grafo1:
+        grafo.añadir_vertice(vertice)
 
     # Agregar aristas
-    for vertex, edges in graph.items():
-        for edge, weight in edges.items():
-            grafo.add_edge(vertex, edge, weight)
+    for vertice, aristas in grafo1.items():
+        for arista, peso in aristas.items():
+            grafo.añadir_aristas(vertice, arista, peso)
 
     # Obtener el árbol de expansión máximo
     print(prim(grafo, 'IronMan'))
 
     # Obtener el número maximo de episodios y los pares de episodios que comparten dichos personajes
-    print(get_max_episodes(graph))
+    print(obtener_max_episodios(grafo1))
 
     # Obtener los personajes que aparecen en 9 episodios
-    print(get_characters(graph, 9))
+    print(obtener_personajes(grafo1, 9))

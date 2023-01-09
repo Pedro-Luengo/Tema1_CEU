@@ -22,8 +22,8 @@ def imprimir_2(lista):
 
 #Apartado 3
 #Utilizo la funcion merge_sort() para ordenar la lista inicial de menor a mayor.
-def merge_sort(coleccion: list) -> list:
-    def merge(izquierda: list, derecha: list) -> list:
+def merge_sort(coleccion: list):
+    def merge(izquierda: list, derecha: list):
 
             def _merge():
                 while izquierda and derecha:

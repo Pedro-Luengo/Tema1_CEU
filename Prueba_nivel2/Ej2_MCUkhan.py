@@ -1,56 +1,56 @@
 class Request:
-    def __init__(self, khan, universe, description):
+    def __init__(self, khan, universo, descripcion):
         self.khan = khan
-        self.universe = universe
-        self.description = description
+        self.universo = universo
+        self.descripcion = descripcion
 
-class KhanDecisionQueue:
+class KhanDecisionCola:
     def __init__(self):
-        self.high_priority_queue = []
-        self.medium_priority_queue = []
-        self.low_priority_queue = []
-        self.queue = [[] for _ in range(3)]
+        self.alta_prioridad_cola = []
+        self.media_prioridad_cola = []
+        self.baja_prioridad_cola = []
+        self.cola = [[] for _ in range(3)]
         self.bitacora = []
 
     def add_to_bitacora(self):
         added = False
         while not added:
-            if len(self.high_priority_queue) > 0:
-                self.bitacora.append(f"Nombre de Khan: {self.high_priority_queue[0].khan}. Universo: {self.high_priority_queue[0].universe}. Descripción: {self.high_priority_queue[0].description}")
+            if len(self.alta_prioridad_cola) > 0:
+                self.bitacora.append(f"Nombre de Khan: {self.alta_prioridad_cola[0].khan}. Universo: {self.alta_prioridad_cola[0].universo}. Descripción: {self.alta_prioridad_cola[0].descripcion}")
                 added = True
-            elif len(self.medium_priority_queue) > 0:
-                self.bitacora.append(f"Nombre de Khan: {self.medium_priority_queue[0].khan}. Universo: {self.medium_priority_queue[0].universe}. Descripción: {self.medium_priority_queue[0].description}")
+            elif len(self.media_prioridad_cola) > 0:
+                self.bitacora.append(f"Nombre de Khan: {self.media_prioridad_cola[0].khan}. Universo: {self.media_prioridad_cola[0].universo}. Descripción: {self.media_prioridad_cola[0].descripcion}")
                 added = True
-            elif len(self.low_priority_queue) > 0:
-                self.bitacora.append(f"Nombre de Khan: {self.low_priority_queue[0].khan}. Universo: {self.low_priority_queue[0].universe}. Descripción: {self.low_priority_queue[0].description}")
+            elif len(self.baja_prioridad_cola) > 0:
+                self.bitacora.append(f"Nombre de Khan: {self.baja_prioridad_cola[0].khan}. Universo: {self.baja_prioridad_cola[0].universe}. Descripción: {self.baja_prioridad_cola[0].descripcion}")
                 added = True
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        request = self.dequeue()
+        request = self.decolar()
         if request is not None:
             return request
         raise StopIteration
 
     def add_request_to_queue(self, request):
-        self.queue.append(request)
+        self.cola.append(request)
     
-    def enqueue(self, request):
-        if request.khan == "Gran Conquistador" or request.universe == "616" or "El que permanece" in request.description:
-            self.queue[0].append(f"El Khan es: {request.khan}. El universo es: {request.universe}. La descripción es: {request.description}.")
-        elif request.khan == "Khan que todo lo sabe" or "Carnicero de Dioses" in request.description or request.universe == "838":
-            self.queue[1].append(f"El Khan es: {request.khan}. El universo es: {request.universe}. La descripción es: {request.description}.")
+    def encolar(self, request):
+        if request.khan == "Gran Conquistador" or request.universo == "616" or "El que permanece" in request.descripcion:
+            self.cola[0].append(f"El Khan es: {request.khan}. El universo es: {request.universo}. La descripción es: {request.descripcion}.")
+        elif request.khan == "Khan que todo lo sabe" or "Carnicero de Dioses" in request.descripcion or request.universo == "838":
+            self.cola[1].append(f"El Khan es: {request.khan}. El universo es: {request.universo}. La descripción es: {request.descripcion}.")
         else:
-            self.queue[2].append(f"El Khan es: {request.khan}. El universo es: {request.universe}. La descripción es: {request.description}.")
+            self.cola[2].append(f"El Khan es: {request.khan}. El universo es: {request.universo}. La descripción es: {request.descripcion}.")
         
         
 
-    def dequeue(self):
-        for i, requests in enumerate(self.queue):
+    def decolar(self):
+        for i, requests in enumerate(self.cola):
             if requests:
-                return self.queue[i].pop(0)
+                return self.cola[i].pop(0)
         return None
 
     def review_log(self):
@@ -58,21 +58,21 @@ class KhanDecisionQueue:
 
 def print_request(request):
     print(f"Nombre de Khan: {request.khan}")
-    print(f"Universo: {request.universe}")
-    print(f"Descripción: {request.description}")
+    print(f"Universo: {request.universo}")
+    print(f"Descripción: {request.descripcion}")
 
 if __name__ == "__main__":
 
-    queue = KhanDecisionQueue()
+    cola = KhanDecisionCola()
 
-    queue.high_priority_queue.append(Request("Gran Conquistador", "616", "El que permanece"))
-    queue.medium_priority_queue.append(Request("Khan que todo lo sabe", "838", "Carnicero de Dioses"))
-    queue.low_priority_queue.append(Request("Khan de otro universo", "123", "Otro pedido"))
+    cola.alta_prioridad_cola.append(Request("Gran Conquistador", "616", "El que permanece"))
+    cola.media_prioridad_cola.append(Request("Khan que todo lo sabe", "838", "Carnicero de Dioses"))
+    cola.baja_prioridad_cola.append(Request("Khan de otro universo", "123", "Otro pedido"))
 
-    for i in queue.high_priority_queue + queue.medium_priority_queue + queue.low_priority_queue:
-        queue.enqueue(i)
+    for i in cola.alta_prioridad_cola + cola.media_prioridad_cola + cola.baja_prioridad_cola:
+        cola.encolar(i)
     
-    for request in queue.high_priority_queue or queue.medium_priority_queue or queue.low_priority_queue:
-        queue.add_to_bitacora()
-    print(queue.queue)
-    print(queue.bitacora)
+    for request in cola.alta_prioridad_cola or cola.media_prioridad_cola or cola.baja_prioridad_cola:
+        cola.add_to_bitacora()
+    print(cola.cola)
+    print(cola.bitacora)

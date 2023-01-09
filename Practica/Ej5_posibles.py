@@ -1,30 +1,50 @@
-def minimo_num_monedas(valor: int):
-    # Definir la lista de monedas y billetes disponibles
-    monedas = [1, 2, 5, 10, 20, 50, 100, 500, 1000]
-    
-    # Contador de monedas y billetes necesarios
-    num_monedas = 0
-    
-    # Lista de monedas y billetes utilizados
-    monedas_usadas = []
-    
-    # Mientras haya cambio por dar, seguir buscando monedas y billetes
-    while valor > 0:
-        # Encontrar la moneda o billete más grande disponible que sea menor o igual al valor de cambio
-        moneda = max([c for c in monedas if c <= valor])
-        # Restar el valor de la moneda o billete al valor de cambio
-        valor -= moneda
-        # Aumentar en 1 el contador de monedas y billetes necesarios
-        num_monedas += 1
-        # Añadir la moneda o billete a la lista de monedas y billetes utilizados
-        monedas_usadas.append(moneda)
-    
-    # Devolver el contador de monedas y billetes necesarios y la lista de monedas y billetes utilizados
-    return num_monedas, monedas_usadas
+class Nodo:
+    def __init__(self, valor, siguiente=None):
+        self.valor = valor
+        self.siguiente = siguiente
 
-# Pruebas
-if __name__ == "__main__":
-    print(minimo_num_monedas(0))   # Debe imprimir (0, [])
-    print(minimo_num_monedas(70))  # Debe imprimir (2, [50, 20])
-    print(minimo_num_monedas(121))  # Debe imprimir (3, [100, 20, 1])
-    print(minimo_num_monedas(442))  # Debe imprimir (3, [100, 100, 100, 100, 20, 20, 2])
+class ListaEnlazada:
+    def __init__(self):
+        self.cabeza = None
+        self.cola = None
+        self.longitud = 0
+
+    def append(self, valor):
+        nuevo_nodo = Nodo(valor)
+        if self.longitud == 0:
+            self.cabeza = nuevo_nodo
+            self.cola = nuevo_nodo
+        else:
+            self.cola.siguiente = nuevo_nodo
+            self.cola = nuevo_nodo
+        self.longitud += 1
+
+def obtener_cambio(cantidad, monedas):
+    cambio = ListaEnlazada()
+    for moneda in reversed(monedas):
+        while moneda <= cantidad:
+            cambio.append(moneda)
+            cantidad -= moneda
+    return cambio
+
+if __name__ == '__main__':
+
+    # Prueba con el primer ejemplo
+    cantidad = 342
+    monedas = [1, 2, 5, 10, 20, 50, 100, 500, 1000]
+    cambio = obtener_cambio(cantidad, monedas)
+    nodo = cambio.cabeza
+    print(f"Se necesitan {cambio.longitud} monedas/billetes:")
+    while nodo is not None:
+        print(nodo.valor)
+        nodo = nodo.siguiente
+
+    # Prueba con el segundo ejemplo
+    cantidad = 67
+    monedas = [1, 2, 5, 10, 20, 50, 100, 500, 1000]
+    cambio = obtener_cambio(cantidad, monedas)
+    nodo = cambio.cabeza
+    print(f"Se necesitan {cambio.longitud} monedas/billetes:")
+    while nodo is not None:
+        print(nodo.valor)
+        nodo = nodo.siguiente

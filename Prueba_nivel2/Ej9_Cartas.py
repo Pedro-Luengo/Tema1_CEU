@@ -1,68 +1,68 @@
 import random
 
-class Card:
-    def __init__(self, value, suit):
-        self.value = value
-        self.suit = suit
+class Carta:
+    def __init__(self, valor, palo):
+        self.valor = valor
+        self.palo = palo
 
-class Deck:
+class Baraja:
     def __init__(self):
-        self.cards = []
+        self.cartas = []
 
-    def generate_deck(self):
-        for value in range(1, 13):
-            for suit in ['espada', 'basto', 'copa', 'oro']:
-                self.cards.append(Card(value, suit))
-        random.shuffle(self.cards)
-        return self.cards
+    def generar_baraja(self):
+        for valor in range(1, 13):
+            for palo in ['espada', 'basto', 'copa', 'oro']:
+                self.cartas.append(Carta(valor, palo))
+        random.shuffle(self.cartas)
+        return self.cartas
 
-    def separate_by_suit(self):
-        spades = []
-        clubs = []
-        cups = []
-        golds = []
-        for card in self.cards:
-            if card.suit == 'espada':
-                spades.append(card)
-            elif card.suit == 'basto':
-                clubs.append(card)
-            elif card.suit == 'copa':
-                cups.append(card)
-            elif card.suit == 'oro':
-                golds.append(card)
-        return spades, clubs, cups, golds
+    def separar_por_palo(self):
+        espadas = []
+        bastos = []
+        copas = []
+        oros = []
+        for carta in self.cartas:
+            if carta.palo == 'espada':
+                espadas.append(carta)
+            elif carta.palo == 'basto':
+                bastos.append(carta)
+            elif carta.palo == 'copa':
+                copas.append(carta)
+            elif carta.palo == 'oro':
+                oros.append(carta)
+        return espadas, bastos, copas, oros
 
-    def sort_by_value(self, spades, clubs, cups, golds):
-        spades.sort(key=lambda x: x.value)
-        clubs.sort(key=lambda x: x.value)
-        cups.sort(key=lambda x: x.value)
-        golds.sort(key=lambda x: x.value)
-        return spades , clubs, cups, golds
+    def ordenar_por_valor(self, espadas, bastos, copas, oros):
+        espadas.sort(key=lambda x: x.valor)
+        bastos.sort(key=lambda x: x.valor)
+        copas.sort(key=lambda x: x.valor)
+        oros.sort(key=lambda x: x.valor)
+        return espadas, bastos, copas, oros
     
-    def listas_copias(self, spades, clubs, cups, golds):
-        spades_copy = []
-        clubs_copy = []
-        cups_copy = []
-        golds_copy = []
-        for carta in spades:
-            spades_copy.append(f"{carta.value} de {carta.suit}, ")
-        for carta in clubs:
-            clubs_copy.append(f"{carta.value} de {carta.suit}, ")
-        for carta in cups:
-            cups_copy.append(f"{carta.value} de {carta.suit}, ")
-        for carta in golds: 
-            golds_copy.append(f"{carta.value} de {carta.suit}, ")
-        return spades_copy, clubs_copy, cups_copy, golds_copy
+    def listas_copias(self, espadas, bastos, copas, oros):
+        espadas_copy = []
+        bastos_copy = []
+        copas_copy = []
+        oros_copy = []
+        for carta in espadas:
+            espadas_copy.append(f"{carta.valor} de {carta.palo}, ")
+        for carta in bastos:
+            bastos_copy.append(f"{carta.valor} de {carta.palo}, ")
+        for carta in copas:
+            copas_copy.append(f"{carta.valor} de {carta.palo}, ")
+        for carta in oros: 
+            oros_copy.append(f"{carta.valor} de {carta.palo}, ")
+        return espadas_copy, bastos_copy, copas_copy, oros_copy
 # Creamos una instancia de la clase Deck
-deck = Deck()
+baraja = Baraja()
 
 # Generamos el mazo de forma aleatoria
-deck.generate_deck()
+baraja.generar_baraja()
 
 # Separamos las cartas por palo
-spades, clubs, cups, golds = deck.separate_by_suit()
-print(spades, clubs, cups, golds, sep="\n")
+espadas, bastos, copas, oros = baraja.separar_por_palo()
+print(espadas, bastos, copas, oros, sep="\n")
 
 # Ordenamos las cartas de espadas
-deck.sort_by_value(spades, clubs, cups, golds)
-print(deck.listas_copias(spades, clubs, cups, golds) , sep="\n")
+baraja.ordenar_por_valor(espadas, bastos, copas, oros)
+print(baraja.listas_copias(espadas, bastos, copas, oros) , sep="\n")
